@@ -1,3 +1,4 @@
+import { ListDepartementsComponent } from './list-departements/list-departements.component';
 import { EmployeeComponent } from './employe-add/employe-add.component';
 import { Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
@@ -8,6 +9,7 @@ import { RequestLeaveComponent } from './request-leave/request-leave.component';
 import { ListeCongesComponent } from './liste-conges/liste-conges.component';
 import { ListeEmployesComponent } from './liste-employes/liste-employes.component';
 import { ListeDemandesComponent } from './liste-demandes/liste-demandes.component';
+import { DepartementAddComponent } from './departement-add/departement-add.component';
 
 export const routes: Routes = [ {
     path: '',
@@ -20,8 +22,9 @@ export const routes: Routes = [ {
       {path:  'conges', component: ListeCongesComponent},
       {path:  'employes', component: ListeEmployesComponent},
       {path:  'demandes', component: ListeDemandesComponent},
-      { path: 'employe-add', component: EmployeeComponent }
-
+      { path: 'employe-add', component: EmployeeComponent },
+      {path : 'departments-add', component: DepartementAddComponent},
+      {path: 'departments', component: ListDepartementsComponent}
     ],
   },
   {
