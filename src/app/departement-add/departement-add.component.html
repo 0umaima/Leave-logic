@@ -1,0 +1,47 @@
+<div class="content-wrapper">
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <a [routerLink]="['/departments']" class="btn btn-primary btn-sm ml-1">
+            <i class="fa fa-arrow-circle-left"></i> Back
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="content">
+    <div class="container-fluid">
+      <div class="card card-default">
+        <div class="card-header">
+          <h3 class="card-title">Ajouter departement</h3>
+        </div>
+
+        <div class="card-body">
+          <form  (ngSubmit)="onSubmit()">
+            <div class="form-group">
+              <label for="nom">Nom departement <span class="text-danger">*</span></label>
+              <input type="text" id="nom" formControlName="nom" class="form-control" required>
+              <div *ngIf="hasError('nom', 'required')" class="text-danger">
+                Ce champ est obligatoire.
+              </div>
+            </div>
+
+            <div class="card-footer" style="background: transparent;">
+              <div class="form-group" style="float: right;">
+                <button type="button" class="btn btn-default" (click)="Reset()">
+                  Annuler
+                </button>
+                <button type="submit" class="btn btn-primary">
+                  <i class="fa fa-save mr-1"></i>Enregistrer
+                </button>
+              </div>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
