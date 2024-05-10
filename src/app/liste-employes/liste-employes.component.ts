@@ -1,24 +1,27 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { NgbPaginationModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { EMPLOYEES, Employees } from '../models/user.model';
-
-
-
-
+import { NgbdModalBasic } from "../shared/floatpop/popup.component";
+import { RouterModule } from '@angular/router';
 @Component({
-  selector: 'app-liste-employes',
-  standalone: true,
-	imports: [DecimalPipe, FormsModule, NgbTypeaheadModule, NgbPaginationModule],
-  templateUrl: './liste-employes.component.html',
-  styleUrl: './liste-employes.component.css'
+    selector: 'app-liste-employes',
+    standalone: true,
+    templateUrl: './liste-employes.component.html',
+    styleUrls: ['./liste-employes.component.css'],
+    providers: [NgbdModalBasic] // Add NgbdModalBasic as a provider
+    ,
+    imports: [DecimalPipe, FormsModule, NgbPaginationModule, NgbdModalBasic,RouterModule]
 })
 export class ListeEmployesComponent {
+  @ViewChild(NgbdModalBasic) floatpopComponent!: NgbdModalBasic; // Assuming FloatpopComponent is the name of the component
+
   page = 1;
 	pageSize = 4;
 	collectionSize = EMPLOYEES.length;
 	employees!: Employees[];
+  showModal: boolean = false;
 
 	constructor() {
 		this.refreshEmployees();
@@ -30,4 +33,7 @@ export class ListeEmployesComponent {
 			(this.page - 1) * this.pageSize + this.pageSize,
 		);
 	}
+
+
+
 }

@@ -1,3 +1,4 @@
+import { EmployeeComponent } from './employe-add/employe-add.component';
 import { Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -17,7 +18,8 @@ export const routes: Routes = [ {
       {path:  'request', component: RequestLeaveComponent},
       {path:  'conges', component: ListeCongesComponent},
       {path:  'employes', component: ListeEmployesComponent},
-      {path:  'demandes', component: ListeDemandesComponent}
+      {path:  'demandes', component: ListeDemandesComponent},
+      { path: 'employe-add', component: EmployeeComponent }
 
     ],
   },

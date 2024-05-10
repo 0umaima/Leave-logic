@@ -1,0 +1,15 @@
+
+<hr>
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Ajouter employé </h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')">
+    </button>
+  </div>
+  <div class="modal">
+    <input type="text" [(ngModel)]="userInput" placeholder="Enter information...">
+    <button (click)="onSave()">Save</button>
+  </div>
+  
+</ng-template>
+
