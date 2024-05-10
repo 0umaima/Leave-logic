@@ -1,0 +1,43 @@
+<h1 class="">Liste des demandes</h1>
+
+<table class="table table-striped  ">
+    <thead>
+        <tr>
+            <th scope="col">Employe</th>
+            <th scope="col">Type de congé</th>
+            <th scope="col">Durée</th>
+            <th scope="col">Action </th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (country of countries; track country.name) {
+        <tr>
+            <th scope="row">{{ country.id }}</th>
+            <td>
+
+                {{ country.name }}
+            </td>
+            <td class="flex gap-2 ">
+                <div class="fw-medium  flex-nowrap ">De <span
+                        class="flex-nowrap text-decoration-underline fw-normal ">15 / 02 / 2022</span></div>
+                <div class="fw-medium ">A <span class="flex-nowrap text-decoration-underline  fw-normal">20 / 02 /
+                        2022</span></div>
+            </td>
+            <td class="text-success fw-medium "> <app-dropdown [buttonText]="'sélectionnez statut'" [dropdownItems]="Status"
+                    (itemSelected)="handleDropdownSelection($event)"> </app-dropdown></td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+<div class="d-flex justify-content-between p-2">
+    <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
+        (pageChange)="refreshCountries()">
+    </ngb-pagination>
+
+    <select class="form-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshCountries()">
+        <option [ngValue]="2">2 items per page</option>
+        <option [ngValue]="4">4 items per page</option>
+        <option [ngValue]="6">6 items per page</option>
+    </select>
+</div>

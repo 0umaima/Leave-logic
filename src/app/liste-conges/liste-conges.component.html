@@ -1,0 +1,48 @@
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1 class="mb-0">Liste des congés</h1>
+    <button class="btn btn-success d-flex align-items-center justify-content-center">
+      <span class="fw-medium me-2">Export to pdf</span>
+      <i class="fa-solid fa-file-arrow-down text-white"></i>
+    </button>
+  </div>
+
+<table class="table table-striped  ">
+    <thead>
+        <tr>
+            <th scope="col">Employe</th>
+            <th scope="col">Type de congé</th>
+            <th scope="col">Durée</th>
+            <th scope="col">Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (country of countries; track country.name) {
+        <tr>
+            <th scope="row">{{ country.id }}</th>
+            <td>
+
+                {{ country.name }}
+            </td>
+            <td class="flex gap-2 ">
+                <div class="fw-medium  flex-nowrap ">De <span
+                        class="flex-nowrap text-decoration-underline fw-normal ">15 / 02 / 2022</span></div>
+                <div class="fw-medium ">A <span class="flex-nowrap text-decoration-underline  fw-normal">20 / 02 /
+                        2022</span></div>
+            </td>
+            <td class="text-success fw-medium ">Autorisé </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+<div class="d-flex justify-content-between p-2">
+    <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
+        (pageChange)="refreshCountries()">
+    </ngb-pagination>
+
+    <select class="form-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshCountries()">
+        <option [ngValue]="2">2 items per page</option>
+        <option [ngValue]="4">4 items per page</option>
+        <option [ngValue]="6">6 items per page</option>
+    </select>
+</div>
