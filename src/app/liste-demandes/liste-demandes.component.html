@@ -10,32 +10,33 @@
         </tr>
     </thead>
     <tbody>
-        @for (country of countries; track country.name) {
-        <tr>
-            <th scope="row">{{ country.id }}</th>
+       @for(conge of conges; track conge.id) {
+        <tr   >
+            <th scope="row">{{ conge.id }}</th>
             <td>
 
-                {{ country.name }}
+                {{ conge.motif }}
             </td>
             <td class="flex gap-2 ">
                 <div class="fw-medium  flex-nowrap ">De <span
-                        class="flex-nowrap text-decoration-underline fw-normal ">15 / 02 / 2022</span></div>
-                <div class="fw-medium ">A <span class="flex-nowrap text-decoration-underline  fw-normal">20 / 02 /
-                        2022</span></div>
+                        class="flex-nowrap text-decoration-underline fw-normal "> {{ conge.date_debut }}</span></div>
+                <div class="fw-medium ">A <span class="flex-nowrap text-decoration-underline  fw-normal">{{ conge.date_debut }}</span></div>
             </td>
-            <td class="text-success fw-medium "> <app-dropdown [buttonText]="'sélectionnez statut'" [dropdownItems]="Status"
-                    (itemSelected)="handleDropdownSelection($event)"> </app-dropdown></td>
+            <td class="text-success fw-medium "> <app-dropdown [buttonText]="conge.status" [dropdownItems]="Status"
+                    (itemSelected)="handleDropdownSelection(conge, $event)"> </app-dropdown></td>
         </tr>
-        }
+       }
+        
+        
     </tbody>
 </table>
 
 <div class="d-flex justify-content-between p-2">
     <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
-        (pageChange)="refreshCountries()">
+        (pageChange)="refreshConges()">
     </ngb-pagination>
 
-    <select class="form-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshCountries()">
+    <select class="form-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshConges()">
         <option [ngValue]="2">2 items per page</option>
         <option [ngValue]="4">4 items per page</option>
         <option [ngValue]="6">6 items per page</option>

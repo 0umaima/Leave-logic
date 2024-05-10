@@ -1,5 +1,5 @@
 
-<h1>Liste des demandes</h1>
+<h1>Mes demandes de congé</h1>
 
 <table class="table table-striped  ">
 	<thead>
@@ -11,18 +11,18 @@
 		</tr>
 	</thead>
 	<tbody>
-		@for (country of countries; track country.name) {
+		@for (demande of demandes; track demande.id) {
 		<tr>
-			<th scope="row">{{ country.id }}</th>
+			<th scope="row">{{ demande.id }}</th>
 			<td>
 
-				{{ country.name }}
+				{{ demande.motif }}
 			</td>
 			<td class="flex gap-2 ">
-				<div class="fw-medium  flex-nowrap ">De <span class="flex-nowrap text-decoration-underline fw-normal ">15 / 02 / 2022</span></div>
-				<div class="fw-medium ">A <span  class="flex-nowrap text-decoration-underline  fw-normal">20 / 02 / 2022</span></div>
+				<div class="fw-medium  flex-nowrap ">De <span class="flex-nowrap text-decoration-underline fw-normal ">{{ demande.date_debut }}</span></div>
+				<div class="fw-medium ">A <span  class="flex-nowrap text-decoration-underline  fw-normal">{{ demande.date_fin }}</span></div>
 			</td>
-			<td class="text-warning fw-medium ">En cours ... </td>
+			<td class="text-warning fw-medium ">{{ demande.status }}</td>
 		</tr>
 		}
 	</tbody>
@@ -30,10 +30,10 @@
 
 <div class="d-flex justify-content-between p-2">
 	<ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
-		(pageChange)="refreshCountries()">
+		(pageChange)="refreshDemandes()">
 	</ngb-pagination>
 
-	<select class="form-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshCountries()">
+	<select class="form-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshDemandes()">
 		<option [ngValue]="2">2 items per page</option>
 		<option [ngValue]="4">4 items per page</option>
 		<option [ngValue]="6">6 items per page</option>

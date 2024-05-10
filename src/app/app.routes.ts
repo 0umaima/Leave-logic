@@ -12,9 +12,10 @@ import { ListeDemandesComponent } from './liste-demandes/liste-demandes.componen
 export const routes: Routes = [ {
     path: '',
     component: LayoutComponentComponent,
+    canActivate: [AuthenticationGuard],
     children: [
       { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-      { path: 'dashboard', component: DashboardComponent },
+      { path: 'dashboard', component: DashboardComponent , canActivate: [AuthenticationGuard]},
       {path:  'request', component: RequestLeaveComponent},
       {path:  'conges', component: ListeCongesComponent},
       {path:  'employes', component: ListeEmployesComponent},
