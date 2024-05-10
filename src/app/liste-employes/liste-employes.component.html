@@ -12,18 +12,17 @@
 		</tr>
 	</thead>
 	<tbody>
-		@for (country of countries; track country.name) {
+		@for (employee of employees; track employee.nom) {
 		<tr>
-			<th scope="row">{{ country.id }}</th>
-			<td>
-
-				{{ country.name }}
+			<th scope="row">{{ employee.id }}</th>
+			<td class="fw-medium ">
+				{{ employee.nom }} {{ employee.prenom }}
 			</td>
 			<td class="flex gap-2 ">
-				managerQmanager.com
+				{{ employee.email }} 
 			</td>
-			<td class="text-warning fw-medium ">20 Jours </td>
-            <td class="text-warning fw-medium ">Manager </td>
+			<td class="text-warning fw-medium ">{{ employee.soldeConge }} Jours  </td>
+            <td class="">{{ employee.role }}  </td>
 		</tr>
 		}
 	</tbody>
@@ -31,10 +30,10 @@
 
 <div class="d-flex justify-content-between p-2">
 	<ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
-		(pageChange)="refreshCountries()">
+		(pageChange)="refreshEmployees()">
 	</ngb-pagination>
 
-	<select class="form-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshCountries()">
+	<select class="form-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshEmployees()">
 		<option [ngValue]="2">2 items per page</option>
 		<option [ngValue]="4">4 items per page</option>
 		<option [ngValue]="6">6 items per page</option>

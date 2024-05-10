@@ -62,6 +62,14 @@
   [tabindex="-1"]:focus:not(:focus-visible) {
     outline: 0 !important;
   }
+  .alert-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1500; 
+    width: auto;
+  }
+  
   
   hr {
     box-sizing: content-box;

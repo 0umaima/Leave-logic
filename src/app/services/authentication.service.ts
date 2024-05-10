@@ -1,40 +1,36 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
-import { AppUser } from '../models/user.model';
+import { EMPLOYEES, Employees } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-users : AppUser[] = [];
-authenticatedUser: AppUser | undefined;
+// private users : Employees[] = [];
+
+  private users: Employees[] = EMPLOYEES;
+private authenticatedUser?: Employees;
 
   constructor() {
-    this.users.push({
-      userId: '0', email: 'admin@admin.com', password: 'admin', roles: ['ADMIN']
-    }, {
-      userId: '1', email: 'user@ouma.com', password: 'ouma', roles: ['ADMIN', 'USER']
-    }, {
-      userId: '2', email: 'user@user.com', password: 'admin', roles: [ 'USER']
-    })
+    this.loadUser();
    }
 
-   public login(email: string, password: string): Observable<AppUser>{
+   public login(email: string, password: string): Observable<Employees>{
     console.log("Login attempt with email:", email, "password:", password);
-    let appUser = this.users.find(u => u.email == email)
-    if(!appUser) return throwError(new Error("user not found here"))
-    if(appUser.password != password) return throwError( new Error("wrong credentials"))
+    const appUser = this.users.find(u => u.email === email);
+    if (!appUser) return throwError(() => new Error("User not found"));
+    if (appUser.password !== password) return throwError(() => new Error("Wrong credentials"));
     return of(appUser);
    }
 
-   public autheticateUser(appUser: AppUser) : Observable<boolean> {
+   public autheticateUser(appUser: Employees) : Observable<boolean> {
     this.authenticatedUser = appUser;
-    localStorage.setItem("authUser", JSON.stringify({email: appUser.email, roles: appUser.roles, jwt: "JWT_TOKEN"}));
+    localStorage.setItem("authUser", JSON.stringify({email: appUser.email, roles: appUser.role, jwt: "JWT_TOKEN"}));
     return of(true);
    }
 
-   public hasRole (role: string) {
-    return this.authenticatedUser!.roles.includes(role)
+   public hasRole (role: string): boolean {
+    return this.authenticatedUser ? this.authenticatedUser.role.includes(role) : false;
    }
 
    public isAuthenticated () {

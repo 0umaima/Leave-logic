@@ -1,1 +1,4 @@
 <router-outlet></router-outlet>
+<div class="alert-container">
+    <ngb-toast aria-live="polite" aria-atomic="true" *ngFor="let toast of toasts" [class]="toast.classname"  >{{ toast.textOrTpl }}</ngb-toast>
+    </div>
