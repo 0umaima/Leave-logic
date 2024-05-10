@@ -1,0 +1,96 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <a [routerLink]="['/employes']" class="btn btn-primary btn-sm ml-1">
+            <i class="fa fa-arrow-circle-left"></i> Back
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="content">
+    <div class="container-fluid">
+      <div class="card card-default">
+        <div class="card-header">
+          <h3 class="card-title">Add Employee</h3>
+        </div>
+
+        <div class="card-body">
+          <form>
+            <div *ngIf="show">
+              <input type="hidden" formControlName="EmployeeId">
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Nom</label>
+                  <input type="text" formControlName="nom" class="form-control">
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Prenom</label>
+                  <input type="text" formControlName="prenom" class="form-control">
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Departement</label>
+                  <input type="text" formControlName="departement" class="form-control">
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Email</label>
+                  <input type="text" formControlName="email" class="form-control">
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Solde</label>
+                  <input type="text" formControlName="solde" class="form-control">
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Mot de passe</label>
+                  <input type="text" formControlName="mdp" class="form-control">
+                </div>
+              </div>
+
+              <div class="col-md-12 d-flex justify-content-center align-items-center" style="width: 200px;" >
+                <div class="form-group">
+                  <label>Role</label>
+                  <select formControlName="role" class="form-control">
+                    <option value="">Select Role</option>
+                    <option value="1">Employe</option>
+                    <option value="2">Manager</option>
+                    <option value="3">RH</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-footer" style="background: transparent;">
+              <div class="form-group" style="float: right;">
+                <button class="btn btn-default" type="reset" style="background-color: gray;color: white;" (click)="formReset()">Cancel</button> &nbsp;
+
+                <button type="submit" class="btn btn-primary text-white ladda-button" id="btnSaveitemInfo" data-style="expand-right">
+                  <i class="fa fa-save mr-1"></i>Save
+                </button>
+              </div>
+            </div>
+        </form>
+      </div>
+    </div>
+</div>

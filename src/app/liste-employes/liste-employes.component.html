@@ -1,6 +1,9 @@
-
+<div class="d-flex justify-content-between align-items-center mb-3">
 <h1>Liste des employés</h1>
-
+<button class="btn d-flex align-items-center justify-content-center bg-success text-white"  >
+  <span  [routerLink]="['/employe-add']" routerLinkActive="router-link-active">Ajouter un employé</span>
+</button>
+</div>
 <table class="table table-striped  ">
 	<thead>
 		<tr>
@@ -19,7 +22,7 @@
 				{{ employee.nom }} {{ employee.prenom }}
 			</td>
 			<td class="flex gap-2 ">
-				{{ employee.email }} 
+				{{ employee.email }}
 			</td>
 			<td class="text-warning fw-medium ">{{ employee.soldeConge }} Jours  </td>
             <td class="">{{ employee.role }}  </td>
