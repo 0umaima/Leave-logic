@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DecimalPipe } from '@angular/common';
+import { DecimalPipe, NgFor } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {
   NgbPaginationModule,
@@ -18,6 +18,7 @@ import { DEMANDES, Demande } from '../models/demande.model';
     NgbTypeaheadModule,
     NgbPaginationModule,
     DropdownComponent,
+    NgFor
   ],
   templateUrl: './liste-demandes.component.html',
   styleUrl: './liste-demandes.component.css',
@@ -52,13 +53,10 @@ export class ListeDemandesComponent {
     );
   }
 
-  handleDropdownSelection(selectedStatus: any): void {
-    this.selectedOption = selectedStatus;
-    const selectedDepartment = this.Status.find(
-      (dept) => dept.value === selectedStatus
-    );
-    if (selectedDepartment) {
-      this.dropdownButtonText = selectedDepartment.label;
-    }
+  handleDropdownSelection(conge: Demande , selectedStatus: string): void {
+    const selectedOption = this.Status.find(status => status.value === selectedStatus);
+    conge.status = selectedOption ? selectedOption.label : 'sélectionnez statut';
  }
+
+ 
 }

@@ -10,8 +10,8 @@
         </tr>
     </thead>
     <tbody>
-        @for (conge of conges; track conge.id) {
-        <tr>
+       @for(conge of conges; track conge.id) {
+        <tr   >
             <th scope="row">{{ conge.id }}</th>
             <td>
 
@@ -22,10 +22,12 @@
                         class="flex-nowrap text-decoration-underline fw-normal "> {{ conge.date_debut }}</span></div>
                 <div class="fw-medium ">A <span class="flex-nowrap text-decoration-underline  fw-normal">{{ conge.date_debut }}</span></div>
             </td>
-            <td class="text-success fw-medium "> <app-dropdown [buttonText]="'sélectionnez statut'" [dropdownItems]="Status"
-                    (itemSelected)="handleDropdownSelection($event)"> </app-dropdown></td>
+            <td class="text-success fw-medium "> <app-dropdown [buttonText]="conge.status" [dropdownItems]="Status"
+                    (itemSelected)="handleDropdownSelection(conge, $event)"> </app-dropdown></td>
         </tr>
-        }
+       }
+        
+        
     </tbody>
 </table>
 
