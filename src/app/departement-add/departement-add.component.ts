@@ -12,7 +12,6 @@ import { RouterLink } from '@angular/router';
 export class DepartementAddComponent {
   departementForm!: FormGroup;
 
-
   constructor(private formb : FormBuilder ){
 
   }

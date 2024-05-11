@@ -1,0 +1,45 @@
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h1>Liste des departements</h1>
+  <button class="btn d-flex align-items-center justify-content-center bg-success text-white"  >
+    <span  [routerLink]="['/departments-add']" routerLinkActive="router-link-active">Ajouter departement</span>
+  </button>
+  </div>
+
+
+
+  <table class="table table-striped  ">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nom </th>
+          </tr>
+    </thead>
+    <tbody>
+      @for (department of dpts; track department.dept_nom) {
+      <tr>
+        <th scope="row">{{ department.id }}</th>
+        <td class="fw-medium ">
+          {{ department.dept_nom }}
+        </td>
+        <button type="button" class="btn btn-default" > <!-- pop up to modify-->
+          modifier
+        </button>
+        <button type="button" class="btn btn-default" ><!-- add function to delete-->
+          Surprimer
+        </button>
+      </tr>
+      }
+    </tbody>
+  </table>
+
+  <div class="d-flex justify-content-between p-2">
+    <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
+      (pageChange)="refreshDepartments()">
+    </ngb-pagination>
+
+    <select class="form-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshDepartments()">
+      <option [ngValue]="2">2 items per page</option>
+      <option [ngValue]="4">4 items per page</option>
+      <option [ngValue]="6">6 items per page</option>
+    </select>
+  </div>

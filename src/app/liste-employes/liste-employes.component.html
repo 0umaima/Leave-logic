@@ -26,6 +26,12 @@
 			</td>
 			<td class="text-warning fw-medium ">{{ employee.soldeConge }} Jours  </td>
             <td class="">{{ employee.role }}  </td>
+            <td class="text-end"> <!-- Align buttons to the right -->
+              <div class="d-flex justify-content-end"> <!-- Use flexbox utilities -->
+                <button type="button" class="btn btn-primary" routerLink="/employee-modify" (click)="modify(employee.id)">Modifier</button>
+                <button type="button" class="btn btn-danger ms-1" (click)="delete(employee.id)">Supprimer</button> <!-- Add margin to separate buttons -->
+              </div>
+            </td>
 		</tr>
 		}
 	</tbody>

@@ -1,16 +1,16 @@
 import { NgIf } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { RouterLink, ActivatedRoute, Router } from '@angular/router';
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-employee',
-  templateUrl: './employe-add.component.html',
-  styleUrls: ['./employe-add.component.css'],
+  selector: 'app-employee-modify',
   standalone: true,
-  imports: [RouterLink, NgIf]
+  imports: [RouterLink,NgIf],
+  templateUrl: './employee-modify.component.html',
+  styleUrl: './employee-modify.component.css'
 })
-export class EmployeeComponent  {
+export class EmployeeModifyComponent {
   employeeForm!: FormGroup;
   newEmployee: any;
   submitted = false;
@@ -18,13 +18,8 @@ export class EmployeeComponent  {
 
   constructor(private formBuilder: FormBuilder) {
     this.employeeForm = this.formBuilder.group({
-      nom: ['', Validators.required],
-      prenom: ['', Validators.required],
-      department: ['', Validators.required],
-      role: ['', Validators.required],
-      solde: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      motdepass: ['', Validators.required],
+      email: ['', Validators.email]
+
     });
   }
 
@@ -46,6 +41,3 @@ export class EmployeeComponent  {
     this.employeeForm.reset();
   }
 }
-
-
-

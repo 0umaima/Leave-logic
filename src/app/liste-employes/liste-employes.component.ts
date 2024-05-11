@@ -15,6 +15,7 @@ import { RouterModule } from '@angular/router';
     imports: [DecimalPipe, FormsModule, NgbPaginationModule, NgbdModalBasic,RouterModule]
 })
 export class ListeEmployesComponent {
+
   @ViewChild(NgbdModalBasic) floatpopComponent!: NgbdModalBasic; // Assuming FloatpopComponent is the name of the component
 
   page = 1;
@@ -34,6 +35,19 @@ export class ListeEmployesComponent {
 		);
 	}
 
+  modify(id : number | undefined) {
+            //retrive the emplotye id from DB
+            // change employe data
+            // not all atribute necessarly should change
+            // save to DB
+  }
+
+  delete(id : number | undefined){
+    // confirm to delete this employee
+    //retribe employe id from DB
+    //invoke bakend method deletebyid()
+    //save
+  }
 
 
 }
