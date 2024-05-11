@@ -25,7 +25,7 @@ export class NgbdModalBasic {
   content: any;
   constructor(private modalService: NgbModal) {}
   @Output() save = new EventEmitter<string>();
-  
+
   open(content: any) {
     const modalRef = this.modalService.open(this.content, { size: 'lg' , scrollable :true });
     modalRef.componentInstance.content = content;
