@@ -1,8 +1,19 @@
 export interface Departement{
-  id : number ,
-  dept_nom: string
+  nom_dept: string,
+  id_dept : number
+
+
 }
 
+export class Departement{
+  nom_dept: string
+  id_dept : number
+  constructor(id: number, nom: string) {
+    this.id_dept = id;
+    this.nom_dept= nom;
+}
+}
+/*
 export const departements: Departement[] = [
 	{
     id :1 ,
@@ -38,3 +49,4 @@ export const departements: Departement[] = [
 	}
 
 ];
+*/

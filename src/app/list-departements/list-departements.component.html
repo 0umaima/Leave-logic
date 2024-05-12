@@ -15,20 +15,18 @@
           </tr>
     </thead>
     <tbody>
-      @for (department of dpts; track department.dept_nom) {
-      <tr>
-        <th scope="row">{{ department.id }}</th>
+
+      <tr *ngFor="let department of dpts;">
+        <th scope="row">{{ department.id_dept }}</th>
         <td class="fw-medium ">
-          {{ department.dept_nom }}
+          {{ department.nom_dept }}
         </td>
-        <button type="button" class="btn btn-default" > <!-- pop up to modify-->
-          modifier
-        </button>
-        <button type="button" class="btn btn-default" ><!-- add function to delete-->
-          Surprimer
-        </button>
+        <div class="d-flex justify-content-end">
+          <button type="button" class="btn btn-primary" (click)="modify(department.id_dept)">Modifier</button>
+          <button type="button" class="btn btn-danger ms-1" (click)="delete(department.id_dept)">Supprimer</button>
+        </div>
       </tr>
-      }
+
     </tbody>
   </table>
 

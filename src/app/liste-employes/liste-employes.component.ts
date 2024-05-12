@@ -1,4 +1,4 @@
-import { EmployeeService } from './../employee.service';
+import { EmployeeService } from '../services/employee.service';
 import { Component, ViewChild } from '@angular/core';
 import { DecimalPipe, NgFor } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -15,7 +15,7 @@ import { HttpClient } from '@angular/common/http';
     styleUrls: ['./liste-employes.component.css'],
     providers: [NgbdModalBasic,NgFor] // Add NgbdModalBasic as a provider
     ,
-    imports: [DecimalPipe, FormsModule, NgbPaginationModule, NgbdModalBasic,RouterModule]
+    imports: [DecimalPipe, FormsModule, NgFor,NgbPaginationModule, NgbdModalBasic,RouterModule]
 })
 export class ListeEmployesComponent {
 
@@ -23,19 +23,37 @@ export class ListeEmployesComponent {
 
   page = 1;
 	pageSize = 4;
-	collectionSize = 20;
-	employees!: Employees[];
+	employees!: any[];
+	collectionSize = 0;
   showModal: boolean = false;
 
   constructor(private http: HttpClient,private employeeService :EmployeeService) {
-    this.employeeService.getEmployees().subscribe((employees) => {
-      console.log(employees);
-      this.employees = employees;
-    });
+
     };
+
+
+
     ngAfterViewInit(): void {
-      this.refreshEmployees();
+      this.showEmploye();
     }
+
+    showEmploye() {
+      this.employeeService.getEmployees()
+        .subscribe((data: any[]) => {
+          this.employees = data.map((employee: any, i: number) => ({
+            id: employee.id,
+        nom: employee.nom,
+        prenom: employee.prenom,
+        email: employee.email,
+        soldeconge: employee.soldeconge,
+        role: employee.role, // Check if this is the correct key for the role
+        departement: employee.departement,
+          }));
+          this.collectionSize = this.employees.length;
+          this.refreshEmployees();
+        });
+    }
+
 
 	refreshEmployees() {
 		this.employees = this.employees.map((employee: Employees, i:number) => ({ id: i + 1, ...employee })).slice(
@@ -50,13 +68,13 @@ export class ListeEmployesComponent {
             // not all atribute necessarly should change
             // save to DB
   }
-
-  delete(id : number | undefined){
-    // confirm to delete this employee
-    //retribe employe id from DB
-    //invoke bakend method deletebyid()
-    //save
+  onDeleteEmployee(id: number) {
+    console.log('Deleting employee with ID:', id);
+    if (!id) {
+      console.error('Employee ID is required');
+      return;
+    }
+    this.employeeService.deleteEmployee(id);
   }
-
 
 }

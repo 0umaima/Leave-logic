@@ -20,10 +20,10 @@
         </div>
 
         <div class="card-body">
-          <form  (ngSubmit)="onSubmit()">
+          <form  (ngSubmit)="onSubmit($event)" method="post">
             <div class="form-group">
               <label for="nom">Nom <span class="text-danger">*</span></label>
-              <input type="text" id="nom" formControlName="nom" class="form-control" required>
+              <input type="text" id="nom" name="nom" formControlName="nom" class="form-control" required>
               <div *ngIf="hasError('nom', 'required')" class="text-danger">
                 Ce champ est obligatoire.
               </div>
@@ -32,23 +32,26 @@
             <div class="form-row">
               <div class="form-group">
                 <label for="prenom">prenom <span class="text-danger">*</span></label>
-                <input type="text" id="prenom" formControlName="prenom" class="form-control" required>
+                <input type="text" id="prenom" name="prenom" formControlName="prenom" class="form-control" required>
                 <div *ngIf="hasError('prenom', 'required')" class="text-danger">
                   Ce champ est obligatoire.
                 </div>
               </div>
             </div>
-              <div class="form-group">
-                <label for="department">Departement <span class="text-danger">*</span></label>
-                <input type="text" id="departement" formControlName="departement" class="form-control" required>
-                <div *ngIf="hasError('departement', 'required')" class="text-danger">
-                  Ce champ est obligatoire.
-                </div>
+            <div class="form-group">
+              <label for="department">Departement <span class="text-danger">*</span></label>
+              <select id ="department" name="role" formControlName="department" class="form-control" required>
+                <option value="" disabled selected>Choose a department</option>
+                <option *ngFor="let department of departments" [value]="department.id_dept">{{ department.nom_dept }}</option>
+              </select>
+              <div *ngIf="hasError('department', 'required')" class="text-danger">
+                Ce champ est obligatoire.
               </div>
+            </div>
 
             <div class="form-group">
               <label for="email">Email <span class="text-danger">*</span></label>
-              <input type="email" id="email" formControlName="email" class="form-control" required>
+              <input type="email" id="email" name="email" formControlName="email" class="form-control" required>
               <div *ngIf="hasError('email', 'required')" class="text-danger">
                 Email est obligatoire.
               </div>
@@ -56,10 +59,9 @@
                 Veuillez saisir un email valide.
               </div>
             </div>
-
             <div class="form-group">
               <label for="solde">Solde <span class="text-danger">*</span></label>
-              <input type="text" id="solde" formControlName="solde" class="form-control" required>
+              <input type="text" id="solde" name="solde" formControlName="solde" class="form-control" required>
               <div *ngIf="hasError('solde', 'required')" class="text-danger">
                 Ce champ est obligatoire.
               </div>
@@ -67,14 +69,14 @@
 
             <div class="form-group">
               <label for="mdp">Mot de passe</label>
-              <input type="password" id="mdp" formControlName="mdp" class="form-control">
+              <input type="password" id="mdp" name="mdp" formControlName="mdp" class="form-control">
             </div>
 
             <div class="form-group">
               <label for="role">Rôle</label>
-              <select id="role" formControlName="role" class="form-control">
+              <select id="role" name="role" formControlName="role" class="form-control">
                 <option value="">Sélectionner le rôle</option>
-                <option value="1">Employé</option>
+                <option value="1">Employe</option>
                 <option value="2">Manager</option>
                 <option value="3">RH</option>
               </select>
