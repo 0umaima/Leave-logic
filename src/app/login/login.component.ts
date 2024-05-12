@@ -52,7 +52,7 @@ export class LoginComponent {
           this.errorMessage = err;
           console.dir('Error during login:', err);
           this.showToast(this.errorMessage.message, 'danger');
- 
+
         },
       });
     } else {

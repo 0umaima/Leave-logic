@@ -8,7 +8,7 @@ import { EMPLOYEES, Employees } from '../models/user.model';
 export class AuthenticationService {
 // private users : Employees[] = [];
 
-  private users: Employees[] = EMPLOYEES;
+  private users: Employees[] = EMPLOYEES; // here the list users
 private authenticatedUser?: Employees;
 
   constructor() {

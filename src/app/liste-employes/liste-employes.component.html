@@ -1,50 +1,51 @@
-<div class="d-flex justify-content-between align-items-center mb-3">
-<h1>Liste des employés</h1>
-<button class="btn d-flex align-items-center justify-content-center bg-success text-white"  >
-  <span  [routerLink]="['/employe-add']" routerLinkActive="router-link-active">Ajouter un employé</span>
-</button>
-</div>
-<table class="table table-striped  ">
-	<thead>
-		<tr>
-			<th scope="col">#</th>
-			<th scope="col">Nom et prenom</th>
-			<th scope="col">email</th>
-			<th scope="col">Solde congé</th>
-            <th scope="col">Role</th>
-		</tr>
-	</thead>
-	<tbody>
-		@for (employee of employees; track employee.nom) {
-		<tr>
-			<th scope="row">{{ employee.id }}</th>
-			<td class="fw-medium ">
-				{{ employee.nom }} {{ employee.prenom }}
-			</td>
-			<td class="flex gap-2 ">
-				{{ employee.email }}
-			</td>
-			<td class="text-warning fw-medium ">{{ employee.soldeConge }} Jours  </td>
-            <td class="">{{ employee.role }}  </td>
-            <td class="text-end"> <!-- Align buttons to the right -->
-              <div class="d-flex justify-content-end"> <!-- Use flexbox utilities -->
-                <button type="button" class="btn btn-primary" routerLink="/employee-modify" (click)="modify(employee.id)">Modifier</button>
-                <button type="button" class="btn btn-danger ms-1" (click)="delete(employee.id)">Supprimer</button> <!-- Add margin to separate buttons -->
-              </div>
-            </td>
-		</tr>
-		}
-	</tbody>
-</table>
 
-<div class="d-flex justify-content-between p-2">
-	<ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
-		(pageChange)="refreshEmployees()">
-	</ngb-pagination>
 
-	<select class="form-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshEmployees()">
-		<option [ngValue]="2">2 items per page</option>
-		<option [ngValue]="4">4 items per page</option>
-		<option [ngValue]="6">6 items per page</option>
-	</select>
-</div>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>Liste des employés</h1>
+    <button class="btn d-flex align-items-center justify-content-center bg-success text-white"  >
+      <span  [routerLink]="['/employe-add']" routerLinkActive="router-link-active">Ajouter un employé</span>
+    </button>
+    </div>
+    <table class="table table-striped  ">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nom et prenom</th>
+          <th scope="col">email</th>
+          <th scope="col">Solde congé</th>
+                <th scope="col">Role</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (employee of employees; track employee.nom) {
+        <tr>
+          <th scope="row">{{ employee.id }}</th>
+          <td class="fw-medium ">
+            {{ employee.nom }} {{ employee.prenom }}
+          </td>
+          <td class="flex gap-2 ">
+            {{ employee.email }}
+          </td>
+          <td class="text-warning fw-medium ">{{ employee.soldeConge }} Jours  </td>
+                <td class="text-end">
+                  <div class="d-flex justify-content-end">
+                    <button type="button" class="btn btn-primary" routerLink="/employee-modify" (click)="modify(employee.id)">Modifier</button>
+                    <button type="button" class="btn btn-danger ms-1" (click)="delete(employee.id)">Supprimer</button>
+                  </div>
+                </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+
+    <div class="d-flex justify-content-between p-2">
+      <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
+        (pageChange)="refreshEmployees()">
+      </ngb-pagination>
+
+      <select class="form-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshEmployees()">
+        <option [ngValue]="2">2 items per page</option>
+        <option [ngValue]="4">4 items per page</option>
+        <option [ngValue]="6">6 items per page</option>
+      </select>
+    </div>

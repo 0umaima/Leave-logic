@@ -13,7 +13,7 @@ export interface Employees {
 	email: string;
     password?: string;
 	soldeConge: number;
-    role: string[]; 
+    role: string[];
 	departement: string;
     jwt?: string;
 
@@ -133,4 +133,4 @@ export const EMPLOYEES: Employees[] = [
         role: ['Finance'],
         departement: 'Administration'
     }
-];
+]
