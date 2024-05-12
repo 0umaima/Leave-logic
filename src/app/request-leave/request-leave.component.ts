@@ -1,6 +1,12 @@
 import { Component } from '@angular/core';
 import { DropdownComponent } from '../shared/dropdown/dropdown.component';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { DateRangePickerComponent } from '../shared/date-range-picker/date-range-picker.component';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { NgFor, NgIf } from '@angular/common';
@@ -8,7 +14,13 @@ import { NgFor, NgIf } from '@angular/common';
 @Component({
   selector: 'app-request-leave',
   standalone: true,
-  imports: [DropdownComponent, FormsModule, DateRangePickerComponent, ReactiveFormsModule, NgIf],
+  imports: [
+    DropdownComponent,
+    FormsModule,
+    DateRangePickerComponent,
+    ReactiveFormsModule,
+    NgIf,
+  ],
   templateUrl: './request-leave.component.html',
   styleUrl: './request-leave.component.css',
 })
@@ -48,12 +60,11 @@ export class RequestLeaveComponent {
 
   selectedOption: string = '';
   choosenValue: string = '';
-  dropdownButtonText: string = 'Liste des départements';
+  dropdownButtonText = 'Liste des départements';
   selectedFromDate: NgbDateStruct | undefined;
   selectedToDate: NgbDateStruct | undefined;
 
-  constructor(private fb: FormBuilder) {
-  }
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.leaveRequestForm = this.fb.group({
@@ -64,30 +75,30 @@ export class RequestLeaveComponent {
       toDate: [null, Validators.required],
     });
   }
-
-  handleDepartmentSelection(choosenValue: any): void {
-    this.choosenValue = choosenValue;
+  handleDepartmentSelection(selectedValue: string): void {
     const selectedDepartment = this.departements.find(
-      (dept) => dept.value === choosenValue
+      (dept) => dept.value === selectedValue
     );
+
     if (selectedDepartment) {
       this.dropdownButtonText = selectedDepartment.label;
+    } else {
+      this.dropdownButtonText = 'Select Department';
     }
-    this.leaveRequestForm.patchValue({ selectedDepartment });
 
+    this.leaveRequestForm.patchValue({ department: selectedValue });
   }
 
   handleDropdownSelection(selectedValue: any): void {
     this.selectedOption = selectedValue;
     this.leaveRequestForm.patchValue({ leaveType: selectedValue });
-
   }
 
-  handleDateRangeSelection(dateRange: { from: NgbDateStruct; to: NgbDateStruct }) {
-    this.leaveRequestForm.patchValue({
-      fromDate: dateRange.from,
-      toDate: dateRange.to
-    });
+  handleDateRangeSelection(dateRange: {
+    from: NgbDateStruct;
+    to: NgbDateStruct;
+  }) : void {
+    this.leaveRequestForm.patchValue({ dateRange });
   }
 
   onSubmit() {
@@ -98,17 +109,20 @@ export class RequestLeaveComponent {
     } else {
       console.log('Form is invalid');
       this.markAllAsTouched();
+      this.leaveRequestForm.markAllAsTouched();
     }
   }
 
   markAllAsTouched() {
-    Object.keys(this.leaveRequestForm.controls).forEach(controlName => {
+    Object.keys(this.leaveRequestForm.controls).forEach((controlName) => {
       this.leaveRequestForm.get(controlName)?.markAsTouched();
     });
   }
 
   hasError(controlName: string, errorName: string): boolean {
     const control = this.leaveRequestForm.get(controlName);
-    return control ? control.hasError(errorName) && control.touched : false;
+    return control
+      ? control.hasError(errorName) && (control.dirty || control.touched)
+      : false;
   }
 }
