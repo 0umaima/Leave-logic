@@ -11,20 +11,17 @@
 		</tr>
 	</thead>
 	<tbody>
-		@for (demande of demandes; track demande.id) {
-		<tr>
-			<th scope="row">{{ demande.id }}</th>
-			<td>
-
-				{{ demande.motif }}
-			</td>
-			<td class="flex gap-2 ">
-				<div class="fw-medium  flex-nowrap ">De <span class="flex-nowrap text-decoration-underline fw-normal ">{{ demande.date_debut }}</span></div>
-				<div class="fw-medium ">A <span  class="flex-nowrap text-decoration-underline  fw-normal">{{ demande.date_fin }}</span></div>
-			</td>
-			<td class="text-warning fw-medium ">{{ demande.status }}</td>
-		</tr>
-		}
+		
+     <tr *ngFor="let demande of demandes">
+      <th scope="row">{{ demande.id }}</th>
+      <td>{{ demande.motif }}</td>
+      <td class="flex gap-2">
+        <div class="fw-medium flex-nowrap">De <span class="flex-nowrap text-decoration-underline fw-normal">{{ demande.date_debut }}</span></div>
+        <div class="fw-medium">A <span class="flex-nowrap text-decoration-underline fw-normal">{{ demande.date_fin }}</span></div>
+      </td>
+      <td class="text-warning fw-medium">{{ demande.status }}</td>
+    </tr>
+		
 	</tbody>
 </table>
 
