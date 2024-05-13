@@ -11,6 +11,8 @@ import { NgbDateStruct, NgbDatepickerModule, NgbTypeaheadModule } from '@ng-boot
 import { NgFor, NgIf } from '@angular/common';
 import { Observable, of } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+import { LeaveRequestService } from '../services/leave-request.service';
+import { ToastService } from '../services/toast.service';
 
 @Component({
   selector: 'app-request-leave',
@@ -54,7 +56,15 @@ export class RequestLeaveComponent implements OnInit {
   selectedFromDate: NgbDateStruct | undefined;
   selectedToDate: NgbDateStruct | undefined;
 
-  constructor(private fb: FormBuilder) {}
+
+  constructor(private fb: FormBuilder,  private leaveService: LeaveRequestService, private toastService: ToastService) {}
+
+  showToast(message: string, toastType: 'success' | 'danger' | 'warning') {
+    this.toastService.show(message, {
+      classname: `bg-${toastType} text-light`,
+      delay: 5000,
+    });
+  }
 
   ngOnInit(): void {
     this.leaveRequestForm = this.fb.group({
@@ -125,17 +135,28 @@ export class RequestLeaveComponent implements OnInit {
     }
     
 
-  onSubmit() {
-    if (this.leaveRequestForm.valid) {
-      const formData = this.leaveRequestForm.value;
-      console.log('Form Data: ', JSON.stringify(formData));
-      //TO DO: Send formData to backend
-    } else {
-      console.log('Form is invalid');
-      this.markAllAsTouched();
+    onSubmit() {
+      if (this.leaveRequestForm.valid) {
+        const formData = this.leaveRequestForm.value;
+        console.log('Form Data: ', JSON.stringify(formData));
+    
+        // Send formData to backend using the service
+        this.leaveService.submitLeaveRequest(formData).subscribe(
+          (response) => {
+            console.log('Backend response:', response);
+            this.showToast('Request leave sent', 'success');
+          },
+          (error) => {
+            console.error('Error sending data to backend:', error);
+            this.showToast(error.message || 'An error occurred', 'danger');
+          }
+        );
+      } else {
+        console.log('Form is invalid');
+        this.showToast('Invalid inputs', 'warning');
+        this.markAllAsTouched();
+      }
     }
-  }
-
   markAllAsTouched() {
     Object.keys(this.leaveRequestForm.controls).forEach((controlName) => {
       this.leaveRequestForm.get(controlName)?.markAsTouched();

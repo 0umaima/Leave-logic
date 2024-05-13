@@ -29,7 +29,7 @@ export const EMPLOYEES: Employees[] = [
         email: 'welcomtochillis@gmail.com',
         password: '123456',
         soldeconge: 50,
-        role : "HR",
+        role : "Manager",
     departement : new Departement(7,"informatique")
     },
     {
