@@ -1,7 +1,7 @@
 import { NgIf } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
-import { AuthenticationService } from '../services/authentication.service';
+import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
   selector: 'app-navbar',

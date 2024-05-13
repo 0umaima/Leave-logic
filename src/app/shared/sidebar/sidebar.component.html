@@ -10,7 +10,7 @@
     </a>
 
     <!-- Divider -->
-    <hr class="sidebar-divider my-0">
+    <hr class="sidebar-divider my-0" >
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item">
@@ -26,15 +26,15 @@
     </li>
 
     <!-- Divider -->
-    <hr class="sidebar-divider">
+    <hr class="sidebar-divider" *ngIf="isHR || isManager">
 
     <!-- Heading -->
-    <div class="sidebar-heading">
+    <div class="sidebar-heading" *ngIf="isHR || isManager">
         Interface
     </div>
 
     <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item">
+    <li class="nav-item" *ngIf="isManager">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
             aria-controls="collapseTwo">
             <i class="fas fa-fw fa-cog"></i>
@@ -49,7 +49,7 @@
     </li>
 
     <!-- Nav Item - Utilities Collapse Menu -->
-    <li class="nav-item">
+    <li class="nav-item" *ngIf="isHR || isManager">
         <a class="nav-link collapsed" href="#"   data-toggle="collapse" data-target="#collapseUtilities"
             aria-expanded="true" aria-controls="collapseUtilities">
             <i class="fas fa-fw fa-people-arrows"></i>

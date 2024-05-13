@@ -26,7 +26,7 @@ export const EMPLOYEES: Employees[] = [
         email: 'john.smith@example.com',
         password: 'john.smith',
         soldeConge: 25,
-        role: ['IT'],
+        role: ['HR'],
         departement: 'Engineering'
     },
     {
@@ -34,7 +34,8 @@ export const EMPLOYEES: Employees[] = [
         prenom: 'Emily',
         email: 'emily.johnson@example.com',
         soldeConge: 22,
-        role: ['Finance'],
+        password: 'emily.johnson',
+        role: ['Manager'],
         departement: 'Marketing'
     },
     {

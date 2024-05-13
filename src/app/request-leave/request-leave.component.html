@@ -1,62 +1,80 @@
 <h1 class="mb-2 text-center p-3">Demande de congé</h1>
 <form class="container p-4 rounded-4 shadow-lg mb-3" [formGroup]="leaveRequestForm" (ngSubmit)="onSubmit()">
-    <!-- 2 column grid layout with text inputs for the first and last names -->
-    <div class="row mb-4">
-        <div class="col">
-            <div data-mdb-input-init class="form-outline">
-                <label class="form-label" for="form6Example1">Nom et Prenom</label>
-                <input type="text" id="form6Example1" class="form-control" formControlName="fullName" />
-            </div>
-            <div *ngIf="hasError('fullName', 'required')" class="text-danger">
-                Ce champ est obligatoire.
-            </div>
+  <!-- 2 column grid layout with text inputs for the first and last names -->
+  <div class="row mb-4">
+    <div class="col">
+      <div data-mdb-input-init class="form-outline">
+        <label class="form-label" for="nom">Nom </label>
+        <input type="text" id="nom" class="form-control" formControlName="nom" />
+        <div *ngIf="hasError('nom', 'required')" class="text-danger">
+          Ce champ est obligatoire.
         </div>
-        <div class="col">
-            <!-- Text input -->
-            <div data-mdb-input-init class="form-outline mb-4 w-100">
-                <div>
-                    <label class="form-label" for="form6Example3">Département</label>
-                </div>
-                <app-dropdown formControlName="department" class="w-100" [buttonText]="dropdownButtonText"
-                    [dropdownItems]="departements" (itemSelected)="handleDepartmentSelection($event)"> </app-dropdown>
-            </div>
-        </div>
+      </div>
     </div>
 
-
-
-    <!-- Text input -->
-    <div data-mdb-input-init class="form-outline mb-4 flex flex-column ">
-        <div>
-            <label class="form-label" for="form6Example4">Type de congé</label>
+    <div class="col">
+      <div data-mdb-input-init class="form-outline">
+        <label class="form-label" for="prenom">Prenom</label>
+        <input type="text" id="prenom" class="form-control" formControlName="prenom" />
+        <div *ngIf="hasError('prenom', 'required')" class="text-danger">
+          Ce champ est obligatoire.
         </div>
-        <div class="row gap-5">
-            <app-dropdown class="col" [buttonText]="'Congés Administratifs'"
-                [dropdownItems]="congesAdministratifsOptions" (itemSelected)="handleDropdownSelection($event)">
-            </app-dropdown>
-            <app-dropdown class="col" [buttonText]="'Congés de maladie'" [dropdownItems]="congesMaladieOptions"
-                (itemSelected)="handleDropdownSelection($event)">
-            </app-dropdown> <app-dropdown class="col" [buttonText]="'Autres'" [dropdownItems]="autresOptions"
-                (itemSelected)="handleDropdownSelection($event)">
-            </app-dropdown>
-        </div>
-        <div class="mt-3">
-            <input formControlName="leaveType" type="text" class="form-control" [(ngModel)]="selectedOption"  >
-
-        </div>
-        <div *ngIf="hasError('leaveType', 'required')" class="text-danger">
-            Ce champ est obligatoire.
-        </div>
-
-
+      </div>
     </div>
+  </div>
 
-    <!-- Date input -->
-    <div data-mdb-input-init class="form-outline mb-4">
-        <app-date-range-picker ></app-date-range-picker>
-        
+  <!-- Text input -->
+  <div data-mdb-input-init class="form-outline row mb-4">
+    <div class="col">
+      <label class="form-label" for="leaveType">Type de congé</label>
+      <input type="text" id="leaveType" class="form-control" formControlName="leaveType"
+        [ngbTypeahead]="searchConges" placeholder="Select Leave Type" />
+      <div *ngIf="hasError('leaveType', 'required')" class="text-danger">
+        Ce champ est obligatoire.
+      </div>
     </div>
+    <div class="col">
+      <label class="form-label" for="department">Département</label>
+      <input type="text" id="department" class="form-control" formControlName="department"
+        [ngbTypeahead]="searchDepartments" placeholder="Select Department" />
+      <div *ngIf="hasError('department', 'required')" class="text-danger">
+        Ce champ est obligatoire.
+      </div>
+    </div>
+  </div>
 
-    <!-- Submit button -->
-    <button data-mdb-ripple-init type="button" class="btn btn-primary btn-block mb-4">Submit Request</button>
+  <!-- Date input -->
+  <div class="form-outline mb-4">
+    <div class="row">
+      <div class="form-group col">
+        <label class="form-label" for="fromDate">Du</label>
+        <div class="input-group mb-3">
+          <input class="form-control" placeholder="yyyy-mm-dd" id="fromDate" formControlName="fromDate"
+            (ngModelChange)="onFromDateChange($event)" ngbDatepicker #fromDp="ngbDatepicker" />
+          <button class="btn btn-outline-primary" (click)="fromDp.toggle()" type="button">
+            <i class="fa-solid fa-calendar-check"></i>
+          </button>
+        </div>
+        <div *ngIf="hasError('fromDate', 'required') || hasError('fromDate', 'dateRangeInvalid')" class="text-danger">
+          Ce champ est obligatoire ou date invalide.
+        </div>
+      </div>
+      <div class="form-group col">
+        <label class="form-label" for="toDate">A</label>
+        <div class="input-group mb-3">
+          <input class="form-control" placeholder="yyyy-mm-dd" id="toDate" formControlName="toDate"
+            (ngModelChange)="onToDateChange($event)" ngbDatepicker #toDp="ngbDatepicker" />
+          <button class="btn btn-outline-primary" (click)="toDp.toggle()" type="button">
+            <i class="fa-solid fa-calendar-check"></i>
+          </button>
+        </div>
+        <div *ngIf="hasError('toDate', 'required') || hasError('toDate', 'dateRangeInvalid')" class="text-danger">
+          Ce champ est obligatoire ou date invalide.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Submit button -->
+  <button type="submit" class="btn btn-primary btn-block mb-4">Submit Request</button>
 </form>

@@ -7,6 +7,7 @@ import { RequestLeaveComponent } from './request-leave/request-leave.component';
 import { ListeCongesComponent } from './liste-conges/liste-conges.component';
 import { ListeEmployesComponent } from './liste-employes/liste-employes.component';
 import { ListeDemandesComponent } from './liste-demandes/liste-demandes.component';
+import { RoleGuard } from './guards/role.guard';
 
 export const routes: Routes = [ {
     path: '',
@@ -14,11 +15,11 @@ export const routes: Routes = [ {
     canActivate: [AuthenticationGuard],
     children: [
       { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-      { path: 'dashboard', component: DashboardComponent , canActivate: [AuthenticationGuard]},
+      { path: 'dashboard', component: DashboardComponent },
       {path:  'request', component: RequestLeaveComponent},
-      {path:  'conges', component: ListeCongesComponent},
-      {path:  'employes', component: ListeEmployesComponent},
-      {path:  'demandes', component: ListeDemandesComponent}
+      {path:  'conges', component: ListeCongesComponent , canActivate: [ RoleGuard], data: { roles: ['Manager', 'HR'] }},
+      {path:  'employes', component: ListeEmployesComponent, canActivate: [ RoleGuard], data: { roles: ['Manager'] }},
+      {path:  'demandes', component: ListeDemandesComponent,  canActivate: [ RoleGuard], data: { roles: ['Manager' ] }}
 
     ],
   },
