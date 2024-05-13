@@ -17,10 +17,8 @@ export class EmployeeService {
   }
 
   deleteEmployee(id: number | undefined ){
-    this.http.delete(`${this.baseUrl}/delete/${id}`);
+    console.log(">>",id);
   }
-
-
 
   addEmployee(employee: any, role: string): Observable<any> {
     const url = `${this.baseUrl}/add/${role}`;

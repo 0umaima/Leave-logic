@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-between align-items-center mb-3">
   <h1>Liste des employés</h1>
-  <button class="btn d-flex align-items-center justify-content-center bg-success text-white" routerLink="/employe-add">
+  <button class="btn d-flex align-items-center justify-content-center bg-success text-white">
     Ajouter un employé
   </button>
 </div>
@@ -13,6 +13,7 @@
       <th scope="col">Solde congé</th>
       <th scope="col">Departement</th>
       <th scope="col">Role</th>
+      <th scope="col">Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -22,11 +23,10 @@
       <td class="flex gap-2">{{ employee.email }}</td>
       <td class="text-warning fw-medium">{{ employee.soldeconge }} Jours</td>
       <td class="flex gap-2">{{ employee.departement}}</td>
-      <td class="flex gap-2">{{ employee.role }}</td>
-      <td class="text-end">
-        <div class="d-flex justify-content-end">
-          <button type="button" class="btn btn-primary" [routerLink]="['employee-modify']">Modifier</button>
-          <button type="button" class="btn btn-danger ms-1" (click)="onDeleteEmployee(employee.id)">Supprimer</button>        </div>
+      <td class="flex gap-2"> Manager</td>
+      <td class="text-end d-flex align-items-start ">
+          <button type="button" class="btn btn-primary">Modifier</button>
+          <button type="button" class="btn btn-danger ms-1" (click)="onDeleteEmployee(employee.id)">Supprimer</button>
       </td>
     </tr>
   </tbody>

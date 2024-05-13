@@ -69,12 +69,14 @@ export class ListeEmployesComponent {
             // save to DB
   }
   onDeleteEmployee(id: number) {
-    console.log('Deleting employee with ID:', id);
+
     if (!id) {
       console.error('Employee ID is required');
       return;
-    }
+    } else{
     this.employeeService.deleteEmployee(id);
-  }
+
+      console.log("deleted employe :" , id)
+  }}
 
 }
