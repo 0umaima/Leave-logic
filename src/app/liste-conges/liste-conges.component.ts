@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
-import { DecimalPipe } from '@angular/common';
+import { DecimalPipe, NgFor } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgbPaginationModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
-import {  Demande } from '../models/demande.model';
 import { CongeService } from '../conge.service';
+import { demandeConge } from '../models/demande_conge.model';
 
 @Component({
   selector: 'app-liste-conges',
   standalone: true,
-	imports: [DecimalPipe, FormsModule, NgbTypeaheadModule, NgbPaginationModule],
+	imports: [DecimalPipe, NgFor,FormsModule, NgbTypeaheadModule, NgbPaginationModule],
   templateUrl: './liste-conges.component.html',
   styleUrl: './liste-conges.component.css'
 })
@@ -17,7 +17,7 @@ export class ListeCongesComponent {
 	page = 1;
 	pageSize = 4;
 	collectionSize = 0;
-	conges!: Demande[];
+	conges!: demandeConge[];
 	selectedOption: string = '';
 	dropdownButtonText: string = 'sélectionnez statut';
 
@@ -34,19 +34,28 @@ export class ListeCongesComponent {
     this.showDemande();
   }
   showDemande() {
-    this.congeservice.getConge()
-      .subscribe((data: Demande[]) => {
-        this.conges = data.map((demandes: any, i: number) => ({
-          id: demandes.id,
-          motif:demandes.motif,
-          date_debut : demandes.date_debut,
-          date_fin : demandes.date_fin,
-          status: demandes.statu
-        }));
-        this.collectionSize = this.conges.length;
-        this.refreshConges();
-      });
-  }
+    this.congeservice.getConge().subscribe(
+        (data: any) => {
+            // Check if data is an object
+            if (typeof data === 'object' && data !== null) {
+                // Map the data keys to employe and values to motif, date_debut, and date_fin
+                this.conges = Object.keys(data).map((employe: string) => ({
+                    employe: employe,
+                    motif: data[employe][0],
+                    date_debut: data[employe][1],
+                    date_fin: data[employe][2]
+                }));
+                this.collectionSize = this.conges.length;
+                this.refreshConges();
+            } else {
+                console.error("Data received from API is not an object.");
+            }
+        },
+        error => {
+            console.error("Error fetching data from API:", error);
+        }
+    );
+}
 
 
 

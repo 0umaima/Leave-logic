@@ -22,16 +22,25 @@ export interface Employees {
 }
 
 export const EMPLOYEES: Employees[] = [
-    { // currently using this employe because i have it in databse
-      // to retrives conge and demandes lists just testing
+    {
         id:1052,
         nom: 'Employe',
         prenom: '1',
         email: 'welcomtochillis@gmail.com',
         password: '123456',
         soldeconge: 50,
-        role : "IT",
+        role : "Employe",
     departement : new Departement(7,"informatique")
-    }
+    },
+    {
+      id:205,
+      nom: 'john',
+      prenom: 'smith',
+      email: 'john.smith@exemple.com',
+      password: 'john.smith',
+      soldeconge: 50,
+      role : "Employe",
+  departement : new Departement(7,"informatique")
+  }
 ]
 
